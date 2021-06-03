@@ -19,7 +19,6 @@ import {
 
 import IAP from "react-native-iap";
 
-// Platform select will allow you to use a different array of product ids based on the platform
 const items = Platform.select({
   ios: [],
   android: ["rniapt_699_1m"],
@@ -30,28 +29,28 @@ let purchaseErrorSubscription;
 let img = require("./walter.jpg");
 
 export default function App() {
-  const [purchased, setPurchased] = useState(false); //set to true if the user has active subscription
-  const [products, setProducts] = useState({}); //used to store list of products
+  const [purchased, setPurchased] = useState(false);
+  const [products, setProducts] = useState({});
 
   const validate = async (receipt) => {
     try {
-      // send receipt to backend
-      const deliveryReceipt = await fetch("add your backend link here", {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        body: JSON.stringify({ data: receipt }),
-      }).then((res) => {
-        res.json().then((r) => {
-          // do different things based on response
-          if (r.result.error == -1) {
-            Alert.alert("Error", "There has been an error with your purchase");
-          } else if (r.result.isActiveSubscription) {
-            setPurchased(true);
-          } else {
-            Alert.alert("Expired", "your subscription has expired");
-          }
-        });
-      });
+      
+      // const deliveryReceipt = await fetch("add your backend link here", {
+      //   headers: { "Content-Type": "application/json" },
+      //   method: "POST",
+      //   body: JSON.stringify({ data: receipt }),
+      // }).then((res) => {
+      //   res.json().then((r) => {
+      //     // do different things based on response
+      //     if (r.result.error == -1) {
+      //       Alert.alert("Error", "There has been an error with your purchase");
+      //     } else if (r.result.isActiveSubscription) {
+      //       setPurchased(true);
+      //     } else {
+      //       Alert.alert("Expired", "your subscription has expired");
+      //     }
+      //   });
+      // });
     } catch (error) {
       Alert.alert("Error!", error.message);
     }
