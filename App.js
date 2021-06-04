@@ -23,13 +23,13 @@ import {
 import IAP from "react-native-iap";
 
 const items = Platform.select({
-  ios: [],
+  ios: ["rniapt_699_1m"],
   android: ["rniapt_699_1m"],
 });
 
 let purchaseUpdateSubscription;
 let purchaseErrorSubscription;
-let img = require("./walter.jpg");
+
 
 export default function App() {
   const [purchased, setPurchased] = useState(false);
@@ -79,7 +79,7 @@ export default function App() {
             try {
               const receipt = res[res.length - 1].transactionReceipt;
               if (receipt) {
-                validate(receipt);
+                //validate(receipt);
               }
             } catch (error) {}
           });
@@ -97,7 +97,7 @@ export default function App() {
     purchaseUpdateSubscription = IAP.purchaseUpdatedListener((purchase) => {
       const receipt = purchase.transactionReceipt;
       if (receipt) {
-        validate(receipt);
+        //validate(receipt);
         IAP.finishTransaction(purchase, false);
       }
     });
@@ -119,7 +119,6 @@ export default function App() {
     return (
       <View>
         <Text style={styles.title}>WELCOME TO THE APP!</Text>
-        <Image source={img} style={{ height: 100, width: 100 }} />
       </View>
     );
   }
